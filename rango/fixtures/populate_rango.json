@@ -1,0 +1,30 @@
+[
+  {
+    "model": "rango.Category",
+    "pk": 1,
+    "fields": {
+      "name": "Python"
+    }
+  },
+  {
+    "model": "rango.Category",
+    "fields": {
+      "name": "Django"
+    }
+  },
+  {
+    "model": "rango.Category",
+    "fields": {
+      "name": "Other frameworks"
+    }
+  },
+  {
+    "model": "rango.Page",
+    "fields": {
+      "category": 1,
+      "title": "Official Python Tutorial",
+      "url": "http://docs.python.org/2/tutorial/",
+      "views": 0
+    }
+  }
+]
