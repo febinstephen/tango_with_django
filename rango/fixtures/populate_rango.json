@@ -8,12 +8,14 @@
   },
   {
     "model": "rango.Category",
+    "pk": 2,
     "fields": {
       "name": "Django"
     }
   },
   {
     "model": "rango.Category",
+    "pk": 3,
     "fields": {
       "name": "Other frameworks"
     }
@@ -26,5 +28,32 @@
       "url": "http://docs.python.org/2/tutorial/",
       "views": 0
     }
-  }
+   },
+   {
+     "model": "rango.Page",
+     "fields": {
+       "category": 1,
+       "title": "How to Think like a Computer Scientist",
+       "url": "http://docs.python.org/2/tutorial/",
+       "views": 0
+     }
+    },
+    {
+      "model": "rango.Page",
+      "fields": {
+        "category": 2,
+        "title": "Django Rocks",
+        "url": "http://www.djangorocks.com/",
+        "views": 0
+      }
+     },
+     {
+       "model": "rango.Page",
+       "fields": {
+         "category": 3,
+         "title": "Flask",
+         "url": "http://flask.pocoo.org",
+         "views": 0
+       }
+      }
 ]
