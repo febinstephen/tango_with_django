@@ -3,10 +3,17 @@
     <head>
         <title>Rango</title>
     </head>
+    {% extends 'base.html' %}
+
+    {% load staticfiles %}
+
+    {% block title %}{{ category_name }}{% endblock %}
+
+    {% block body_block %}
 
     <body>
         {% if category %}
-        <h1>{{ category_name }}</h1>
+            <h1>{{ category_name }}</h1>
             {% if pages %}
             <ul>
                 {% for page in pages %}
@@ -22,5 +29,6 @@
         {% if category %}
         <a href="/rango/category/{{ category_name_url }}/add_page/">Add a Page</a>
         {% else %} A category by this name does not exist {% endif %}
+    {% endblock %}
     </body>
 </html>
