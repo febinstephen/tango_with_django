@@ -12,6 +12,22 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
+from django.template import RequestContext
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from django.shortcuts import render_to_response
+from django.http import HttpResponse
+from rango.models import Category
+from rango.models import Page
+from rango.models import UserProfile
+from rango.forms import UserForm, UserProfileForm
+from rango.forms import CategoryForm, PageForm
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from datetime import datetime
+from django.contrib.auth.models import User
+from django.shortcuts import redirect
 
 
 def index(request):
@@ -61,13 +77,54 @@ def index(request):
     #return HttpResponse(template.render(context, request))
 
 
+def encode_url(str):
+    return str.replace(' ', '_')
+
+
+def decode_url(str):
+    return str.replace('_', ' ')
+
+
+def get_category_list(max_results=0, starts_with=''):
+    cat_list = []
+    if starts_with:
+        cat_list = Category.objects.filter(name__startswith=starts_with)
+    else:
+        cat_list = Category.objects.all()
+
+    if max_results > 0:
+        if (len(cat_list) > max_results):
+            cat_list = cat_list[:max_results]
+
+    for cat in cat_list:
+        cat.url = encode_url(cat.name)
+
+    return cat_list
+
+
+"""
 def about(request):
     template = loader.get_template('rango/about.html')
     context = {
         'boldmessage': "I am bold font from the context"
     }
     return HttpResponse(template.render(context, request))
+"""
 
+
+def about(request):
+    # Request the context.
+    template = loader.get_template('rango/about.html/')
+    #context = RequestContext(request)
+    context = {}
+    cat_list = get_category_list()
+    context['cat_list'] = cat_list
+    # If the visits session varible exists, take it and use it.
+    # If it doesn't, we haven't visited the site so set the count to zero.
+
+    # Return and render the response, ensuring the count is passed to the template engine.
+    #return render_to_response('about.html/', context_dict, context)
+    return HttpResponse(template.render(context, request))
 
 def category(request, category_name_url):
 
